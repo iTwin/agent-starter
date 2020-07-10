@@ -1,45 +1,43 @@
-# @bentley/my-agent
-
-Copyright © Bentley Systems, Inc. 2020
+# iModel.js "Starter Agent"
 
 ## About this Repository
 
-This repository contains source code for the my-agent.
+This repository is a quick way to skip the boilerplate and get started with writing an iModel.js Agent!  Simply clone, setup your config, and you're ready to start writing your agent!
 
-## Build Instructions
+## Configuration
 
-1. Clone repository (first time) with `git clone` or pull updates to the repository (subsequent times) with `git pull`. It is possible this repo was generated with yeoman.
-2. Install dependencies: `npm install`
-3. Clean: `npm run clean`
-4. Build source: `npm run build`
-5. Provide missing values to your .env file (NOTE: THIS FILE SHOULD NOT BE COMMITTED).
+The provided agent app _almost_ works right out of the box, but you'll need to configure it with your project, iModel, and OIDC information.
+To do this, just create a `.env` file at the project root with the following:
 
-## Running @bentley/my-agent
+```ini
+###############################################################################
+# This file contains secrets - don't commit or share it!
+###############################################################################
 
-Running agent locally:
+# Specify an iModel
+CONTEXT_ID=
+IMODEL_ID=
 
-`npm run start`
+# OIDC configuration
+#   Don't forget to add <CLIENT_ID>@apps.imsoidc.bentley.com to your CONNECT project too!
+CLIENT_ID=
+CLIENT_SECRET=
+```
 
-## Logging
+Your `CLIENT_ID` and `CLIENT_SECRET` should both come from the iModel.js [registration dashboard](https://www.imodeljs.org/getting-started/registration-dashboard/) - be sure to create an "Agent" app!
 
-my-agent Agent logs events using SEQ. To use logging it is needed to provide `SEQ_KEY` in .env file. To get custom dev-seq key: https://docs.datalust.co/docs/api-keys (Don't forget to add an applied property of `Application`, so it is possible to query logs in dev-seq.bentley.com).
+## Building and running your agent
+
+Once you've created your .env file, you can build your agent via `npm run build`.
+
+Or - even better - start TypeScript in watch/incremental rebuild mode: `npm run build -- --watch`
+
+### Running agent locally
+
+To run your agent, you can simply do `npm start` (or `node .` if you're in the project root dir).  This will continuously poll for new changesets pushed to the iModelHub.
+
+For testing, it can often also be useful to skip the event listening and just run against a specific changeset.  To do that, either run `npm start -- --latest` to use the latest changeset, or `npm start -- --changeset=<CHANGESETID>` to use any specific changeset.
 
 ## Next Steps
 
-The entry point of agent is MyAgent.run() method. There you can implement your agent's behavior after the iModel is downloaded.
-
-## Pipelines
-
-Azure variable group is required in order to run agent's pipeline. By default, agent requires variable groups called "my-agent - ENV (REGION)". For example sample-agent - QA UKS. You can change the name of required variable group in agent-azure-pipelines.yaml file.
-
-To create Azure variable group, go to Pipelines -> Library.
-
-Required variables are:
-* AGENT_CLIENT_ID
-* AGENT_CLIENT_SECRET (secret)
-
-You can also add optional variables which are required for logging:
-* SEQ_KEY (secret)
-* SEQ_PORT
-* SEQ_URL
-* CRASH_REPORT_DIR
+The entry point of for both single-changeset test runs and handling individual iModelHub change events is the `MyAgent.run()` method. There you can implement your agent's behavior after the iModel is downloaded.
