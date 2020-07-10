@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "ms-azure-devops.azure-pipelines",
+    "ms-kubernetes-tools.vscode-aks-tools",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}
