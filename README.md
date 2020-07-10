@@ -2,7 +2,8 @@
 
 ## About this Repository
 
-This repository is a quick way to skip the boilerplate and get started writing an iModel.js Agent.  Simply clone, setup your config, and you're ready to go!
+This repository is a quick way to skip the boilerplate and get started writing an iModel.js Agent.  
+Simply clone, `npm install`, setup your config, and you're ready to go!
 
 ## Configuration
 
