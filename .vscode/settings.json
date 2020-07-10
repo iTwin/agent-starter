@@ -4,24 +4,12 @@
   "files.exclude": {
     "lib/**": true,
     "node_modules": true,
-    ".local": true,
-    ".yo-rc.json": true,
-    ".vscode": true,
-    ".gitignore": true,
-    ".gitattributes": true,
-    "package-lock.json": true,
-    "tsconfig.json": true,
-    "tslint.json": true,
-    "LICENSE": true,
   },
   "search.exclude": {
-    "dist/**": true
+    "lib/**": true,
   },
   "files.trimTrailingWhitespace": true,
   "typescript.tsdk": "node_modules\\typescript\\lib",
-  "files.associations": {
-    "**/.pipelines/**/*.yaml": "azure-pipelines"
-  },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.organizeImports": true
