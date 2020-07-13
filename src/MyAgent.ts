@@ -1,6 +1,5 @@
 import { AgentAuthorizationClient, AzureFileHandler } from "@bentley/backend-itwin-client";
-import { assert } from "@bentley/bentleyjs-core";
-import { ChangeSetPostPushEvent, EventSubscription, IModelHubClient } from "@bentley/imodelhub-client";
+import { ChangeSetPostPushEvent, EventSubscription, IModelHubClient, IModelHubEventType } from "@bentley/imodelhub-client";
 import { ApplicationType, AuthorizedBackendRequestContext, BriefcaseDb, BriefcaseManager, IModelHost, IModelHostConfiguration } from "@bentley/imodeljs-backend";
 import { IModelVersion, SyncMode } from "@bentley/imodeljs-common";
 import { AgentConfig } from "./AgentConfig";
@@ -34,13 +33,15 @@ export class MyAgent {
     const ctx = await this.createContext();
 
     // Create iModelHub event subscription
-    this.hubSubscription = await this.hubClient.events.subscriptions.create(ctx, this.config.IMODEL_ID, ["ChangeSetPostPushEvent"]);
+    const eventTypes = [
+      IModelHubEventType.ChangeSetPostPushEvent,
+    ];
+    this.hubSubscription = await this.hubClient.events.subscriptions.create(ctx, this.config.IMODEL_ID, eventTypes);
     console.log(`Event subscription "${this.hubSubscription.wsgId}" created in iModelHub.`);
 
     // Define event listener
     const listener = async (event: ChangeSetPostPushEvent) => {
       try {
-        assert(!!event.changeSetId, "Invalid event."); // FIXME: sanity check
         console.log(`Received notification that changeset "${event.changeSetId} was just posted to the Hub`);
         await this.run(IModelVersion.asOfChangeSet(event.changeSetId));
       } catch (error) {
