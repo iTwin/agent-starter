@@ -24,6 +24,8 @@
     "@bentley/imodeljs-common": "^2.3.0",
     "@bentley/imodeljs-i18n": "^2.3.0",
     "@bentley/itwin-client": "^2.3.0",
+    "@bentley/rbac-client": "^2.3.0",
+    "@bentley/telemetry-client": "^2.3.0",
     "dotenv": "^8.2.0",
     "minimist": "^1.2.5",
     "onanykey": "^1.0.1"
