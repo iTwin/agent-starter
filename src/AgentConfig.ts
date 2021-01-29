@@ -7,14 +7,14 @@ export function loadAgentConfig() {
   if (result.error)
     throw result.error;
 
-  assert(!!process.env.IMJS_CONTEXT_ID, `Missing required env var: "IMJS_CONTEXT_ID"`);
-  assert(!!process.env.IMJS_IMODEL_ID, `Missing required env var: "IMJS_IMODEL_ID"`);
+  assert(!!process.env.CONTEXT_ID, `Missing required env var: "CONTEXT_ID"`);
+  assert(!!process.env.IMODEL_ID, `Missing required env var: "IMODEL_ID"`);
   assert(!!process.env.CLIENT_ID, `Missing required env var: "CLIENT_ID"`);
   assert(!!process.env.CLIENT_SECRET, `Missing required env var: "CLIENT_SECRET"`);
 
   return {
-    IMJS_CONTEXT_ID: process.env.IMJS_CONTEXT_ID,
-    IMJS_IMODEL_ID: process.env.IMJS_IMODEL_ID,
+    CONTEXT_ID: process.env.CONTEXT_ID,
+    IMODEL_ID: process.env.IMODEL_ID,
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET,
   };

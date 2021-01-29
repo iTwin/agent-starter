@@ -2,7 +2,7 @@
 
 ## About this Repository
 
-This repository is a quick way to skip the boilerplate and get started writing an iModel.js Agent.  
+This repository is a quick way to skip the boilerplate and get started writing an iModel.js Agent.
 Simply clone, `npm install`, setup your config, and you're ready to go!
 
 ## Configuration
@@ -16,8 +16,8 @@ To do this, just create a `.env` file at the project root with the following:
 ###############################################################################
 
 # Specify an iModel
-IMJS_CONTEXT_ID=
-IMJS_IMODEL_ID=
+CONTEXT_ID=
+IMODEL_ID=
 
 # OIDC configuration
 #   Don't forget to add <CLIENT_ID>@apps.imsoidc.bentley.com to your CONNECT project too!

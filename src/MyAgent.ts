@@ -36,7 +36,7 @@ export class MyAgent {
     const eventTypes = [
       IModelHubEventType.ChangeSetPostPushEvent,
     ];
-    this.hubSubscription = await this.hubClient.events.subscriptions.create(ctx, this.config.IMJS_IMODEL_ID, eventTypes);
+    this.hubSubscription = await this.hubClient.events.subscriptions.create(ctx, this.config.IMODEL_ID, eventTypes);
     console.log(`Event subscription "${this.hubSubscription.wsgId}" created in iModelHub.`);
 
     // Define event listener
@@ -52,14 +52,14 @@ export class MyAgent {
 
     // Start listening to events
     const authCallback = () => this.oidcClient.getAccessToken();
-    this.deleteEventListener = this.hubClient.events.createListener(ctx, authCallback, this.hubSubscription.wsgId, this.config.IMJS_IMODEL_ID, listener);
+    this.deleteEventListener = this.hubClient.events.createListener(ctx, authCallback, this.hubSubscription.wsgId, this.config.IMODEL_ID, listener);
   }
 
   public async run(version = IModelVersion.latest()) {
     const ctx = await this.createContext();
 
     // Download iModel
-    const briefcaseProps = await BriefcaseManager.downloadBriefcase(ctx, { contextId: this.config.IMJS_CONTEXT_ID, iModelId: this.config.IMJS_IMODEL_ID, asOf: version.toJSON() });
+    const briefcaseProps = await BriefcaseManager.downloadBriefcase(ctx, { contextId: this.config.CONTEXT_ID, iModelId: this.config.IMODEL_ID, asOf: version.toJSON() });
     ctx.enter();
 
     // Open iModel
@@ -87,7 +87,7 @@ export class MyAgent {
     }
 
     if (this.hubSubscription) {
-      await this.hubClient.events.subscriptions.delete(await this.createContext(), this.config.IMJS_IMODEL_ID, this.hubSubscription.wsgId);
+      await this.hubClient.events.subscriptions.delete(await this.createContext(), this.config.IMODEL_ID, this.hubSubscription.wsgId);
       console.log(`Event subscription "${this.hubSubscription.wsgId}" deleted in iModelHub.`);
       this.hubSubscription = undefined;
     }
