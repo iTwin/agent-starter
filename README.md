@@ -2,7 +2,7 @@
 
 ## About this Repository
 
-This repository is a quick way to skip the boilerplate and get started writing an iModel.js Agent.  
+This repository is a quick way to skip the boilerplate and get started writing an iModel.js Agent.
 Simply clone, `npm install`, setup your config, and you're ready to go!
 
 ## Configuration
@@ -36,6 +36,8 @@ Or - even better - start TypeScript in watch/incremental rebuild mode: `npm run 
 ### Running agent locally
 
 To run your agent, you can simply do `npm start` (or `node .` if you're in the project root dir).  This will continuously poll for new changesets pushed to the iModelHub.
+
+Once the agent is listening for changesets, you can use the [iTwinSynchronizer](https://www.bentley.com/en/products/product-line/digital-twins/itwin-synchronizer) to synchronize a change.
 
 For testing, it can often also be useful to skip the event listening and just run against a specific changeset.  To do that, either run `npm start -- --latest` to use the latest changeset, or `npm start -- --changeset=<CHANGESETID>` to use any specific changeset.
 

@@ -1,7 +1,7 @@
 import { AgentAuthorizationClient, AzureFileHandler } from "@bentley/backend-itwin-client";
 import { ChangeSetPostPushEvent, EventSubscription, IModelHubClient, IModelHubEventType } from "@bentley/imodelhub-client";
 import { ApplicationType, AuthorizedBackendRequestContext, BriefcaseDb, BriefcaseManager, IModelHost, IModelHostConfiguration } from "@bentley/imodeljs-backend";
-import { IModelVersion, SyncMode } from "@bentley/imodeljs-common";
+import { IModelVersion } from "@bentley/imodeljs-common";
 import { AgentConfig } from "./AgentConfig";
 
 export class MyAgent {
@@ -59,12 +59,11 @@ export class MyAgent {
     const ctx = await this.createContext();
 
     // Download iModel
-    const downloadOptions = { syncMode: SyncMode.FixedVersion };
-    const briefcaseProps = await BriefcaseManager.download(ctx, this.config.CONTEXT_ID, this.config.IMODEL_ID, downloadOptions, version);
+    const briefcaseProps = await BriefcaseManager.downloadBriefcase(ctx, { contextId: this.config.CONTEXT_ID, iModelId: this.config.IMODEL_ID, asOf: version.toJSON() });
     ctx.enter();
 
     // Open iModel
-    const iModel = await BriefcaseDb.open(ctx, briefcaseProps.key);
+    const iModel = await BriefcaseDb.open(ctx, { fileName: briefcaseProps.fileName, readonly: false });
     ctx.enter();
 
     // TODO....
