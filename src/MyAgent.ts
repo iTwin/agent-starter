@@ -22,14 +22,14 @@ export class MyAgent {
     });
   }
 
-  public async initialize(): Promise<void> {
+  public async initialize() {
     const hostConfig = new IModelHostConfiguration();
     hostConfig.applicationType = IModelJsNative.ApplicationType.WebAgent;
     hostConfig.imodelClient = this.hubClient;
     await IModelHost.startup(hostConfig);
   }
 
-  public async listen(): Promise<void> {
+  public async listen() {
     const ctx = await this.createContext();
 
     // Create iModelHub event subscription
@@ -55,7 +55,7 @@ export class MyAgent {
     this.deleteEventListener = this.hubClient.events.createListener(ctx, authCallback, this.hubSubscription.wsgId, this.config.IMODEL_ID, listener);
   }
 
-  public async run(version = IModelVersion.latest()): Promise<void> {
+  public async run(version = IModelVersion.latest()) {
     const ctx = await this.createContext();
 
     // Download iModel
@@ -80,7 +80,7 @@ export class MyAgent {
     return ctx;
   }
 
-  public async terminate(): Promise<void> {
+  public async terminate() {
     if (this.deleteEventListener) {
       this.deleteEventListener();
       this.deleteEventListener = undefined;

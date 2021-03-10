@@ -1,7 +1,6 @@
 import { assert } from "@bentley/bentleyjs-core";
 import * as dotenv from "dotenv";
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function loadAgentConfig() {
   // Load environment variables from .env file
   const result = dotenv.config();
