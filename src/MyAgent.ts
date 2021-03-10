@@ -1,6 +1,6 @@
 import { AgentAuthorizationClient, AzureFileHandler } from "@bentley/backend-itwin-client";
 import { ChangeSetPostPushEvent, EventSubscription, IModelHubClient, IModelHubEventType } from "@bentley/imodelhub-client";
-import { ApplicationType, AuthorizedBackendRequestContext, BriefcaseDb, BriefcaseManager, IModelHost, IModelHostConfiguration } from "@bentley/imodeljs-backend";
+import { AuthorizedBackendRequestContext, BriefcaseDb, BriefcaseManager, IModelHost, IModelHostConfiguration, IModelJsNative } from "@bentley/imodeljs-backend";
 import { IModelVersion } from "@bentley/imodeljs-common";
 import { AgentConfig } from "./AgentConfig";
 
@@ -24,7 +24,7 @@ export class MyAgent {
 
   public async initialize() {
     const hostConfig = new IModelHostConfiguration();
-    hostConfig.applicationType = ApplicationType.WebAgent;
+    hostConfig.applicationType = IModelJsNative.ApplicationType.WebAgent;
     hostConfig.imodelClient = this.hubClient;
     await IModelHost.startup(hostConfig);
   }
