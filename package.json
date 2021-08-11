@@ -1,7 +1,7 @@
 {
   "name": "my-agent",
   "version": "0.0.1",
-  "description": "A generic iModel.js 'starter' agent.",
+  "description": "A generic iTwin.js 'starter' agent.",
   "author": "Bentley Systems",
   "license": "MIT",
   "private": true,
