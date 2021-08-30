@@ -18,7 +18,7 @@ export class MyAgent {
     this.oidcClient = new AgentAuthorizationClient({
       clientId: config.CLIENT_ID,
       clientSecret: config.CLIENT_SECRET,
-      scope: "imodelhub context-registry-service:read-only urlps-third-party",
+      scope: "itwinjs",
     });
   }
 
